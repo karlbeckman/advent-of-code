@@ -49,16 +49,15 @@ Solution::Solution(std::ifstream& input_file) {
 int Solution::findTotalDistance() {
   int totalDistance = 0;
   for (size_t i = 0; i < left_list.size(); ++i) {
-    totalDistance += std::abs(left_list.at(i) - right_list.at(i));
+    totalDistance += std::abs(left_list[i] - right_list[i]);
   }
   return totalDistance;
 }
 
 int Solution::computeSimilarityScore() {
   int similarity_score = 0;
-  for (size_t i = 0; i < left_list.size(); ++i) {
-    auto element = left_list.at(i);
-    int occurrences = std::count(right_list.begin(), right_list.end(), element);
+  for (const auto& element : left_list) {
+    const int occurrences = std::count(right_list.begin(), right_list.end(), element);
     similarity_score += element * occurrences;
   }
   return similarity_score;
